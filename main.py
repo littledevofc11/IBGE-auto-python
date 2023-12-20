@@ -2,7 +2,7 @@ import webbrowser
 from time import sleep
 
 
-estados = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO']
+estados = ['ac', 'al', 'ap', 'am', 'ba', 'ce', 'df', 'es', 'go', 'ma', 'mt', 'ms', 'mg', 'pa', 'pb', 'pr', 'pe', 'pi', 'rj', 'rn', 'rs', 'ro', 'rr', 'sc', 'sp', 'se', 'to']
 
 def vizualizar_pais():
     url_acesso = 'ibge.gov.br/cidades-e-estados/'
@@ -10,13 +10,21 @@ def vizualizar_pais():
 
 def procurar_estado():
     estado_procurado = input("Qual estado está sendo procurado? ")
-    estado = estado_procurado.upper()
+    estado = estado_procurado.lower()
     if estado in estados:
         url_acesso = 'ibge.gov.br/cidades-e-estados/'+estado
         webbrowser.open(url_acesso)
     else:
-        print("falha, erro de escrita")
+        raise ValueError("Estado indisponivel")
 
+def procurar_cidade():
+    cidade_procurada = input("Qual cidade está sendo procurada? ")
+    cidade = cidade_procurada.strip()
+    cidade = cidade.lower()
+    for estado in estados:
+        url_acesso = 'https://ibge.gov.br/cidades-e-estados/'+estado+'/'+cidade+'.html'
+        webbrowser.open(url_acesso)
 
+procurar_cidade()
 #vizualizar_pais()
-procurar_estado()
+#procurar_estado()
